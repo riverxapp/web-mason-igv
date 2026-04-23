@@ -58,7 +58,6 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     font-size: 16px;
-    /* Prevent legacy or user agent overflows */
     min-width: 320px;
     overflow-x: hidden;
   }
@@ -69,12 +68,11 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     font-family: 'Inter', 'Segoe UI', 'Arial', 'sans-serif';
     text-rendering: optimizeLegibility;
-    line-height: 1.65;
+    line-height: 1.7;
     letter-spacing: 0.01em;
     background-color: hsl(var(--background));
     margin: 0;
     padding: 0;
-    /* Remove legacy body spacing */
     box-sizing: border-box;
   }
 
@@ -90,6 +88,7 @@
     background: none;
     box-shadow: none;
     border-radius: 0;
+    transition: color 0.12s, background 0.14s;
   }
 
   ::selection {
@@ -102,69 +101,79 @@
     outline-offset: 2px;
   }
 
-  /* Enhanced typography and spacing */
-  h1, .app-heading {
-    @apply font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-foreground;
-    margin-bottom: 0.9em;
-    margin-top: 0.3em;
-    line-height: 1.13;
-    letter-spacing: -0.035em;
+  /* Enhanced typography and improved readability */
+  h1,
+  .app-heading {
+    @apply font-bold leading-tight tracking-tight text-foreground;
+    font-size: 2.6rem;
+    @media (min-width: 640px) {
+      font-size: 3.2rem;
+    }
+    @media (min-width: 1024px) {
+      font-size: 4rem;
+    }
+    margin-bottom: 1.1em;
+    margin-top: 0.25em;
+    line-height: 1.12;
+    letter-spacing: -0.038em;
   }
 
   h2 {
     @apply font-semibold text-2xl sm:text-3xl lg:text-4xl text-foreground leading-snug tracking-tight;
-    margin-bottom: 0.7em;
-    margin-top: 2.4em;
-    line-height: 1.18;
-    letter-spacing: -0.03em;
+    margin-bottom: 0.9em;
+    margin-top: 2.2em;
+    line-height: 1.19;
+    letter-spacing: -0.025em;
   }
 
   h3 {
     @apply font-semibold text-xl sm:text-2xl text-foreground leading-snug tracking-tight;
-    margin-bottom: 0.5em;
-    margin-top: 1.5em;
-    line-height: 1.21;
-    letter-spacing: -0.02em;
+    margin-bottom: 0.6em;
+    margin-top: 1.35em;
+    line-height: 1.22;
+    letter-spacing: -0.019em;
   }
 
   h4, h5, h6 {
     @apply font-semibold text-foreground;
-    margin-top: 1.05em;
-    margin-bottom: 0.35em;
-    letter-spacing: -0.01em;
+    margin-top: 1em;
+    margin-bottom: 0.32em;
+    letter-spacing: -0.008em;
   }
 
+  /* Body text: crisp, comfortable, and readable */
   p,
   .app-subheading {
     @apply text-base md:text-lg leading-relaxed text-muted-foreground;
     margin-bottom: 1em;
-    line-height: 1.72;
-    letter-spacing: 0.01em;
+    line-height: 1.68;
+    letter-spacing: 0.008em;
+    font-size: 1.08rem;
+    font-weight: 400;
   }
 
   ul,
   ol {
-    margin-left: 1.7em;
-    margin-bottom: 1.1em;
-    padding-left: 1.4em;
-    line-height: 1.68;
+    margin-left: 1.8em;
+    margin-bottom: 1.18em;
+    padding-left: 1.3em;
+    line-height: 1.7;
   }
 
   li {
-    margin-bottom: 0.4em;
-    padding-left: 0.1em;
+    margin-bottom: 0.38em;
+    padding-left: 0.05em;
   }
 
   main,
   section {
-    margin-bottom: 2.4rem;
+    margin-bottom: 2.6rem;
     @apply w-full;
-    /* Remove conflicting default horizontal padding */
     padding-left: 0;
     padding-right: 0;
+    background-color: unset;
   }
 
-  /* Remove margin and padding on first/last child for stack consistency */
   main > *:first-child,
   section > *:first-child {
     margin-top: 0 !important;
@@ -176,38 +185,33 @@
     padding-bottom: 0 !important;
   }
 
-  /* Normalize legacy/overly generic styles that may conflict */
   [style*="margin"], [style*="padding"] {
-    /* Remove unnecessary default spacing artifacts from possible raw HTML */
     margin-top: revert-layer !important;
     margin-bottom: revert-layer !important;
     padding-top: revert-layer !important;
     padding-bottom: revert-layer !important;
   }
 
-  /* Ensure field labels and buttons have correct baseline spacing */
   label,
   .app-label {
     @apply text-base font-medium leading-none text-foreground;
-    margin-bottom: 0.23em;
+    margin-bottom: 0.19em;
     letter-spacing: 0.005em;
   }
 
-  /* Tighten disabled state colors */
-  :disabled, [aria-disabled="true"] {
-    opacity: 0.5 !important;
+  :disabled,
+  [aria-disabled="true"] {
+    opacity: 0.52 !important;
     cursor: not-allowed !important;
     background: none !important;
     color: hsl(var(--muted-foreground)) !important;
   }
 
-  /* Override for horizontal rule for clean separation */
   hr {
     @apply border-border;
-    margin: 2.5rem 0;
+    margin: 2.4rem 0;
   }
 
-  /* Remove unwanted fieldset/legend default spacing */
   fieldset,
   legend {
     margin: 0;
@@ -217,6 +221,7 @@
 }
 
 @layer components {
+  /* Enhanced main backgrounds and sections for visual clarity */
   .app-surface {
     @apply rounded-2xl border border-border bg-card shadow-sm;
   }
@@ -238,16 +243,17 @@
   .app-heading {
     @apply text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl;
     line-height: 1.14;
-    margin-bottom: 1.18rem;
-    margin-top: 0.2rem;
-    letter-spacing: -0.025em;
+    margin-bottom: 1.23rem;
+    margin-top: 0.18rem;
+    letter-spacing: -0.027em;
   }
 
   .app-subheading {
     @apply text-sm leading-6 text-muted-foreground sm:text-base;
-    margin-bottom: 0.72em;
-    line-height: 1.68;
-    letter-spacing: 0.01em;
+    margin-bottom: 0.78em;
+    line-height: 1.7;
+    letter-spacing: 0.009em;
+    font-size: 1.04rem;
   }
 
   .app-card {
@@ -255,8 +261,9 @@
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.95rem;
-    line-height: 1.65;
+    gap: 1.2rem;
+    line-height: 1.68;
+    box-shadow: 0 0.5px 4px 0 rgba(12, 18, 31, 0.04);
   }
 
   .app-card-muted {
@@ -266,32 +273,33 @@
 
   .app-button-primary {
     @apply inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.029em;
     min-width: 10.5rem;
+    font-size: 1rem;
   }
 
   .app-button-secondary {
     @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-6 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
     letter-spacing: 0.01em;
     min-width: 10.5rem;
+    font-size: 1rem;
   }
 
   .app-input {
     @apply w-full rounded-md border border-input bg-background px-3 py-2 text-base text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
-    margin-bottom: 0.16em;
+    margin-bottom: 0.14em;
     background-color: hsl(var(--background));
     letter-spacing: 0.01em;
   }
 
   .app-label {
     @apply text-base font-medium leading-none text-foreground;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.18em;
     letter-spacing: 0.005em;
   }
 
   .app-page-shell {
     @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 sm:px-8;
-    /* Remove auto vertical pad for stack consistency */
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -304,7 +312,9 @@
     @apply rounded-xl border border-border bg-card shadow-sm p-6;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.2rem;
+    background: hsl(var(--card));
+    box-shadow: 0 1.5px 8px 0 rgba(35, 31, 78, 0.07);
   }
 
   .app-dashboard-panel-muted {
@@ -319,25 +329,26 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.35rem;
+    gap: 0.42rem;
     min-width: 7rem;
-    /* Tighten up spacing for KPI display */
-    line-height: 1.38;
-    font-size: 1rem;
+    line-height: 1.35;
+    font-size: 1.05rem;
     font-weight: 600;
+    background: linear-gradient(120deg, hsl(var(--background)) 85%, hsl(var(--secondary)) 100%);
+    box-shadow: 0 0.25px 3px 0 rgba(34, 52, 64, 0.06);
   }
 
   .app-badge {
     @apply inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.055em;
     text-transform: uppercase;
   }
 
   .app-empty-state {
     @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-base text-muted-foreground;
-    letter-spacing: 0.005em;
-    line-height: 1.6;
-    font-size: 1.05rem;
+    letter-spacing: 0.004em;
+    line-height: 1.64;
+    font-size: 1.06rem;
     background: hsl(var(--background));
   }
 }
