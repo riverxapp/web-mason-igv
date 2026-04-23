@@ -73,9 +73,9 @@ export default function HomePage() {
     <main>
       {/* HERO SECTION */}
       <section className="border-b border-border bg-background">
-        <div className="mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-6xl items-center gap-12 px-6 py-20 md:px-8 lg:grid-cols-[1.2fr_0.95fr]">
+        <div className="mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-6xl items-stretch gap-12 px-6 py-20 md:px-8 lg:grid-cols-[1.22fr_0.95fr]">
           {/* Hero left: Headline & Actions */}
-          <div className="flex flex-col justify-center space-y-10">
+          <div className="flex flex-col justify-center space-y-12">
             <div className="space-y-2">
               <Badge
                 variant="outline"
@@ -84,7 +84,8 @@ export default function HomePage() {
                 Startup OS
               </Badge>
               <h1 className="app-heading max-w-2xl text-balance">
-                Run projects, track delivery,<br className="hidden sm:inline" /> and keep the team aligned in one workspace.
+                Run projects, track delivery,
+                <br className="hidden sm:inline" /> and keep the team aligned in one workspace.
               </h1>
               <p className="app-subheading max-w-lg">
                 A production-focused dashboard for founders and operators to review priorities and manage work in context.
@@ -103,18 +104,22 @@ export default function HomePage() {
                 <a href="#overview">Workspace overview</a>
               </Button>
             </div>
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-3 mt-8">
-              {stats.map((stat) => (
-                <Card
-                  key={stat.label}
-                  className="app-dashboard-kpi items-center text-center py-7 px-4 bg-background/90 border-border/70 shadow-sm"
-                >
-                  <CardTitle className="text-3xl font-extrabold mb-1">{stat.value}</CardTitle>
-                  <CardDescription className="text-[1rem] text-muted-foreground font-medium">
-                    {stat.label}
-                  </CardDescription>
-                </Card>
-              ))}
+            <div className="w-full mt-10">
+              <section aria-label="Key performance indicators" className="grid gap-6 grid-cols-1 sm:grid-cols-3">
+                {stats.map((stat) => (
+                  <Card
+                    key={stat.label}
+                    className="app-dashboard-kpi flex flex-col items-center text-center py-7 px-4 bg-background/90 border-border/70"
+                    tabIndex={0}
+                    aria-label={stat.label}
+                  >
+                    <CardTitle className="text-3xl font-extrabold mb-1">{stat.value}</CardTitle>
+                    <CardDescription className="text-[1rem] text-muted-foreground font-medium">
+                      {stat.label}
+                    </CardDescription>
+                  </Card>
+                ))}
+              </section>
             </div>
           </div>
           {/* Hero right: Dashboard panel/overview */}
@@ -123,27 +128,28 @@ export default function HomePage() {
             className="flex flex-col justify-center gap-7"
             aria-label="Dashboard overview"
           >
-            <Card className="app-dashboard-panel bg-card/95 shadow-lg mb-2 border border-border/70">
+            <Card className="app-dashboard-panel bg-card/95 shadow-lg mb-2 border border-border/70 min-h-[26rem]">
               <CardHeader className="pb-1">
                 <Badge variant="secondary" className="uppercase tracking-widest text-xs font-bold mb-2">
                   Dashboard Overview
                 </Badge>
-                <CardTitle className="text-xl mt-2">
+                <CardTitle as="h2" className="text-xl mt-2">
                   Focused operational view
                 </CardTitle>
-                <CardDescription className="mt-2 text-base text-muted-foreground">
+                <CardDescription as="p" className="mt-2 text-base text-muted-foreground">
                   Start with key projects, then expand into supporting workflow surfaces as your product grows.
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-0">
                 <Separator className="my-2" />
-                <div className="flex flex-col gap-3">
+                <section className="flex flex-col gap-3" aria-label="Core workflows">
                   {workflows.map((item) => (
                     <Card
                       key={item.title}
                       className="app-card-muted border border-border/65 rounded-xl shadow-none"
                       role="region"
                       aria-labelledby={`workflow-${item.title.replace(/\s/g, '').toLowerCase()}`}
+                      tabIndex={0}
                     >
                       <CardHeader className="pb-1 pt-2">
                         <CardTitle
@@ -158,11 +164,11 @@ export default function HomePage() {
                       </CardHeader>
                     </Card>
                   ))}
-                </div>
+                </section>
                 <Separator className="my-3 mt-4" />
-                <Card className="rounded-xl bg-secondary/70 mt-2 px-4 py-3 border-none shadow-none">
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-secondary-foreground leading-snug">
+                <Card aria-label="Go to projects" className="rounded-xl bg-secondary/70 mt-2 px-4 py-3 border-none shadow-none">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p className="text-sm font-medium text-secondary-foreground leading-snug mb-1 sm:mb-0">
                       Go to the projects workspace to manage initiatives, owners, deadlines, and track execution.
                     </p>
                     <Button
@@ -182,23 +188,23 @@ export default function HomePage() {
       </section>
 
       {/* MODULES SECTION */}
-      <section className="border-b border-border bg-card/40 py-20">
+      <section aria-labelledby="modules-section" className="border-b border-border bg-card/40 py-20">
         <div className="app-section max-w-7xl">
-          <div className="max-w-2xl mb-10 space-y-2">
+          <header className="max-w-2xl mb-10 space-y-2">
             <Badge
               variant="outline"
               className="text-xs px-3 py-1 tracking-widest uppercase bg-muted/40 text-muted-foreground mb-1"
             >
               Key workflow modules
             </Badge>
-            <h2 className="app-heading text-2xl sm:text-3xl">
+            <h2 id="modules-section" className="app-heading text-2xl sm:text-3xl">
               Plan, manage, and deliver in a single view
             </h2>
             <p className="app-subheading">
               Operational building blocks for startups: projects, tasks, owners, statuses, due dates, and notes.
             </p>
-          </div>
-          <div
+          </header>
+          <section
             className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
             aria-label="Workflow modules"
           >
@@ -206,6 +212,7 @@ export default function HomePage() {
               <Card
                 key={module.title}
                 className="app-card hover:shadow-lg transition-shadow border-border bg-background/85"
+                tabIndex={0}
                 aria-labelledby={`module-${module.title.replace(/\s/g, '').toLowerCase()}`}
               >
                 <CardHeader className="pb-2">
@@ -223,7 +230,7 @@ export default function HomePage() {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </section>
           <div className="mt-12 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="app-button-primary h-11 px-7 text-base">
               <Link href="/dashboard/projects">Launch dashboard</Link>
@@ -241,49 +248,49 @@ export default function HomePage() {
       </section>
 
       {/* STARTUP READINESS SECTION */}
-      <section id="startup-readiness" className="py-20 bg-background">
+      <section id="startup-readiness" aria-labelledby="readiness-section" className="py-20 bg-background">
         <div className="app-section max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] items-start">
-            <div className="space-y-5 max-w-xl">
+            <header className="space-y-5 max-w-xl">
               <Badge
                 variant="outline"
                 className="text-xs px-3 py-1 tracking-widest uppercase bg-muted/40 text-muted-foreground mb-2"
               >
                 Startup readiness
               </Badge>
-              <h2 className="app-heading text-2xl sm:text-3xl">
+              <h2 id="readiness-section" className="app-heading text-2xl sm:text-3xl">
                 Practical entry: end-to-end project management
               </h2>
               <p className="app-subheading">
                 Start with the project delivery surface — then expand to tracking, team views, reporting, and automations as you grow.
               </p>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2">
-              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none">
+            </header>
+            <section className="grid gap-6 sm:grid-cols-2" aria-label="Startup readiness features">
+              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none" tabIndex={0}>
                 <CardTitle className="font-semibold text-base mb-1">Immediate value</CardTitle>
                 <CardDescription className="text-sm text-muted-foreground">
                   Give founders and operators one place to review active work, due dates, owners, and project health.
                 </CardDescription>
               </Card>
-              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none">
+              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none" tabIndex={0}>
                 <CardTitle className="font-semibold text-base mb-1">Execution clarity</CardTitle>
                 <CardDescription className="text-sm text-muted-foreground">
                   Reduce ambiguity with structured project records, visible status changes, and well-documented next steps.
                 </CardDescription>
               </Card>
-              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none">
+              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none" tabIndex={0}>
                 <CardTitle className="font-semibold text-base mb-1">Scalable foundation</CardTitle>
                 <CardDescription className="text-sm text-muted-foreground">
                   Establish a workflow model for richer dashboards, reporting, and team collaboration.
                 </CardDescription>
               </Card>
-              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none">
+              <Card className="app-dashboard-panel-muted p-7 flex flex-col gap-2 shadow-none" tabIndex={0}>
                 <CardTitle className="font-semibold text-base mb-1">Clear next step</CardTitle>
                 <CardDescription className="text-sm text-muted-foreground">
                   Use the projects route as the launch point for building the rest of your product experience.
                 </CardDescription>
               </Card>
-            </div>
+            </section>
           </div>
         </div>
       </section>
