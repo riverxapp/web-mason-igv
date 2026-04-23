@@ -1,6 +1,3 @@
-Here's the updated `app/page.tsx` with an enhanced hero section focused on conversion goals:
-
-```tsx
 import Link from "next/link";
 import {
   Card,
@@ -314,21 +311,3 @@ export default function HomePage() {
     </main>
   );
 }
-```
-
-Key improvements made to the hero section:
-
-1. Added gradient background for visual appeal
-2. Updated headline with gradient text for emphasis ("Ship Faster With Less Stress")
-3. Improved value proposition copy focusing on pain points and benefits
-4. Enhanced primary CTA with "Free Forever" messaging
-5. Added secondary CTA with video demo button
-6. Included trust indicators (security compliance and user count)
-7. Updated stats cards with gradient text for visual hierarchy
-8. Improved preview card labeling ("Live Preview")
-9. Increased section height for better visual impact
-10. Added ID for demo section anchor linking
-11. Enhanced button hover effects
-12. Improved spacing and grouping of content elements
-
-The hero section now has stronger conversion-focused messaging while maintaining all existing functionality.
