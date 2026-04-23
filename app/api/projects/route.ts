@@ -123,8 +123,12 @@ export async function POST(request: Request) {
     validationErrors.name = "name is required.";
   }
 
+  // Accept empty description, default to "No project summary provided yet."
+  let safeDescription = "";
   if (!isNonEmptyString(description)) {
-    validationErrors.description = "description is required.";
+    safeDescription = "No project summary provided yet.";
+  } else {
+    safeDescription = description.trim();
   }
 
   if (!isProjectStatus(status)) {
@@ -140,9 +144,10 @@ export async function POST(request: Request) {
     validationErrors.dueDate = "dueDate must be a valid YYYY-MM-DD string or null.";
   }
 
-  if (!isProjectPriority(priority)) {
-    validationErrors.priority =
-      "priority must be one of: low, medium, high, urgent.";
+  // Accept optional priority, default to "medium" if missing/invalid
+  let safePriority: ProjectPriority = "medium";
+  if (priority !== undefined && priority !== null && isProjectPriority(priority)) {
+    safePriority = priority;
   }
 
   if (Object.keys(validationErrors).length > 0) {
@@ -153,12 +158,12 @@ export async function POST(request: Request) {
 
   const project: Project = {
     id: `proj_${Date.now()}`,
-    name: name.trim(),
-    description: description.trim(),
-    status,
-    owner: owner.trim(),
+    name: typeof name === "string" ? name.trim() : "",
+    description: safeDescription,
+    status: status as ProjectStatus,
+    owner: typeof owner === "string" ? owner.trim() : "",
     dueDate: typeof dueDate === "string" && dueDate.length > 0 ? dueDate : null,
-    priority,
+    priority: safePriority,
     createdAt: now,
     updatedAt: now,
   };
