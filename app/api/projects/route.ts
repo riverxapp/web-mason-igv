@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-type ProjectStatus = "planned" | "active" | "completed" | "on_hold";
+type ProjectStatus = "planned" | "active" | "completed";
 type ProjectPriority = "low" | "medium" | "high" | "urgent";
 
 type Project = {
@@ -46,8 +46,7 @@ function isProjectStatus(value: unknown): value is ProjectStatus {
   return (
     value === "planned" ||
     value === "active" ||
-    value === "completed" ||
-    value === "on_hold"
+    value === "completed"
   );
 }
 
@@ -130,7 +129,7 @@ export async function POST(request: Request) {
 
   if (!isProjectStatus(status)) {
     validationErrors.status =
-      "status must be one of: planned, active, completed, on_hold.";
+      "status must be one of: planned, active, completed.";
   }
 
   if (!isNonEmptyString(owner)) {
