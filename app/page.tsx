@@ -73,10 +73,10 @@ export default function HomePage() {
     <main>
       {/* HERO SECTION */}
       <section className="border-b border-border bg-background">
-        <div className="mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-6xl items-stretch gap-12 px-6 py-20 md:px-8 lg:grid-cols-[1.22fr_0.95fr]">
+        <div className="mx-auto grid min-h-[80vh] w-full max-w-6xl items-center gap-12 px-6 py-20 md:px-8 lg:grid-cols-2">
           {/* Hero left: Headline & Actions */}
-          <div className="flex flex-col justify-center space-y-12">
-            <div className="space-y-2">
+          <div className="flex flex-col justify-center space-y-10">
+            <div className="space-y-3">
               <Badge
                 variant="outline"
                 className="text-xs px-3 py-1 tracking-widest uppercase bg-muted/60 text-muted-foreground mb-2"
@@ -84,8 +84,12 @@ export default function HomePage() {
                 Startup OS
               </Badge>
               <h1 className="app-heading max-w-2xl text-balance">
-                Run projects, track delivery,
-                <br className="hidden sm:inline" /> and keep the team aligned in one workspace.
+                <span className="block">
+                  Run projects, track delivery,
+                </span>
+                <span className="block sm:inline">
+                  and keep the team <span className="whitespace-nowrap">aligned in one workspace.</span>
+                </span>
               </h1>
               <p className="app-subheading max-w-lg">
                 A production-focused dashboard for founders and operators to review priorities and manage work in context.
@@ -104,23 +108,21 @@ export default function HomePage() {
                 <a href="#overview">Workspace overview</a>
               </Button>
             </div>
-            <div className="w-full mt-10">
-              <section aria-label="Key performance indicators" className="grid gap-6 grid-cols-1 sm:grid-cols-3">
-                {stats.map((stat) => (
-                  <Card
-                    key={stat.label}
-                    className="app-dashboard-kpi flex flex-col items-center text-center py-7 px-4 bg-background/90 border-border/70"
-                    tabIndex={0}
-                    aria-label={stat.label}
-                  >
-                    <CardTitle className="text-3xl font-extrabold mb-1">{stat.value}</CardTitle>
-                    <CardDescription className="text-[1rem] text-muted-foreground font-medium">
-                      {stat.label}
-                    </CardDescription>
-                  </Card>
-                ))}
-              </section>
-            </div>
+            <section aria-label="Key performance indicators" className="w-full mt-10 grid gap-6 grid-cols-1 sm:grid-cols-3">
+              {stats.map((stat) => (
+                <Card
+                  key={stat.label}
+                  className="app-dashboard-kpi flex flex-col items-center text-center py-7 px-4 bg-background/90 border-border/70"
+                  tabIndex={0}
+                  aria-label={stat.label}
+                >
+                  <CardTitle className="text-3xl font-extrabold mb-1">{stat.value}</CardTitle>
+                  <CardDescription className="text-[1rem] text-muted-foreground font-medium">
+                    {stat.label}
+                  </CardDescription>
+                </Card>
+              ))}
+            </section>
           </div>
           {/* Hero right: Dashboard panel/overview */}
           <aside
