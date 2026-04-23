@@ -60,6 +60,7 @@
     font-size: 16px;
     min-width: 320px;
     overflow-x: hidden;
+    background-color: hsl(var(--background));
   }
 
   body {
@@ -73,7 +74,6 @@
     background-color: hsl(var(--background));
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   a,
@@ -92,7 +92,7 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.14);
+    background: hsl(var(--primary) / 0.15);
     color: hsl(var(--foreground));
   }
 
@@ -101,73 +101,85 @@
     outline-offset: 2px;
   }
 
-  /* Enhanced typography and improved readability */
+  /* Enhanced dashboard typography and headings for visual hierarchy */
   h1,
   .app-heading {
-    @apply font-bold leading-tight tracking-tight text-foreground;
-    font-size: 2.6rem;
-    @media (min-width: 640px) {
-      font-size: 3.2rem;
-    }
-    @media (min-width: 1024px) {
-      font-size: 4rem;
-    }
-    margin-bottom: 1.1em;
-    margin-top: 0.25em;
-    line-height: 1.12;
+    @apply font-bold tracking-tight leading-tight text-foreground;
+    font-size: 2.75rem;
+    line-height: 1.07;
+    margin-bottom: 0.95em;
+    margin-top: 0.12em;
     letter-spacing: -0.038em;
+  }
+  @media (min-width: 640px) {
+    h1,
+    .app-heading {
+      font-size: 3.3rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    h1,
+    .app-heading {
+      font-size: 4.3rem;
+    }
   }
 
   h2 {
     @apply font-semibold text-2xl sm:text-3xl lg:text-4xl text-foreground leading-snug tracking-tight;
-    margin-bottom: 0.9em;
-    margin-top: 2.2em;
-    line-height: 1.19;
-    letter-spacing: -0.025em;
+    font-size: 2rem;
+    margin-bottom: 0.65em;
+    margin-top: 2.1em;
+    line-height: 1.16;
+    letter-spacing: -0.019em;
   }
 
   h3 {
     @apply font-semibold text-xl sm:text-2xl text-foreground leading-snug tracking-tight;
-    margin-bottom: 0.6em;
-    margin-top: 1.35em;
-    line-height: 1.22;
-    letter-spacing: -0.019em;
+    font-size: 1.36rem;
+    margin-bottom: 0.47em;
+    margin-top: 1.11em;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
   }
 
   h4, h5, h6 {
     @apply font-semibold text-foreground;
-    margin-top: 1em;
-    margin-bottom: 0.32em;
-    letter-spacing: -0.008em;
+    font-size: 1.03rem;
+    margin-top: 0.64em;
+    margin-bottom: 0.21em;
+    letter-spacing: -0.007em;
   }
 
-  /* Body text: crisp, comfortable, and readable */
+  /* Improve paragraph and section body contrast, rhythm, and spacing */
   p,
   .app-subheading {
     @apply text-base md:text-lg leading-relaxed text-muted-foreground;
-    margin-bottom: 1em;
-    line-height: 1.68;
+    margin-bottom: 0.78em;
+    margin-top: 0.04em;
+    line-height: 1.71;
     letter-spacing: 0.008em;
-    font-size: 1.08rem;
+    font-size: 1.1rem;
     font-weight: 400;
+    max-width: 44rem;
   }
 
   ul,
   ol {
-    margin-left: 1.8em;
-    margin-bottom: 1.18em;
-    padding-left: 1.3em;
-    line-height: 1.7;
+    margin-left: 2em;
+    margin-bottom: 1.16em;
+    padding-left: 1.18em;
+    line-height: 1.71;
   }
 
   li {
-    margin-bottom: 0.38em;
+    margin-bottom: 0.31em;
     padding-left: 0.05em;
   }
 
+  /* Responsive section spacing and reset for dashboard rhythm */
   main,
   section {
-    margin-bottom: 2.6rem;
+    margin-bottom: 2.1rem;
     @apply w-full;
     padding-left: 0;
     padding-right: 0;
@@ -195,7 +207,7 @@
   label,
   .app-label {
     @apply text-base font-medium leading-none text-foreground;
-    margin-bottom: 0.19em;
+    margin-bottom: 0.18em;
     letter-spacing: 0.005em;
   }
 
@@ -209,7 +221,7 @@
 
   hr {
     @apply border-border;
-    margin: 2.4rem 0;
+    margin: 2rem 0;
   }
 
   fieldset,
@@ -221,7 +233,7 @@
 }
 
 @layer components {
-  /* Enhanced main backgrounds and sections for visual clarity */
+  /* Visual shell improvements for dashboard sections */
   .app-surface {
     @apply rounded-2xl border border-border bg-card shadow-sm;
   }
@@ -231,39 +243,41 @@
   }
 
   .app-section {
-    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-8;
     padding-top: 0;
     padding-bottom: 0;
   }
 
   .app-section-padding {
-    @apply py-12 sm:py-14 lg:py-16;
+    @apply py-14 sm:py-16 lg:py-20;
   }
 
   .app-heading {
     @apply text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl;
-    line-height: 1.14;
-    margin-bottom: 1.23rem;
-    margin-top: 0.18rem;
-    letter-spacing: -0.027em;
+    line-height: 1.12;
+    margin-bottom: 1.12rem;
+    margin-top: 0.04rem;
+    letter-spacing: -0.026em;
   }
 
   .app-subheading {
-    @apply text-sm leading-6 text-muted-foreground sm:text-base;
-    margin-bottom: 0.78em;
-    line-height: 1.7;
-    letter-spacing: 0.009em;
-    font-size: 1.04rem;
+    @apply text-base leading-6 text-muted-foreground sm:text-lg;
+    margin-bottom: 0.72em;
+    margin-top: 0.13em;
+    line-height: 1.68;
+    letter-spacing: 0.007em;
+    font-size: 1.06rem;
   }
 
   .app-card {
     @apply rounded-2xl border border-border bg-card text-card-foreground shadow-sm;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.5rem 2rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    line-height: 1.68;
-    box-shadow: 0 0.5px 4px 0 rgba(12, 18, 31, 0.04);
+    gap: 1.1rem;
+    line-height: 1.7;
+    box-shadow: 0 0.5px 4px 0 rgba(12, 18, 31, 0.05);
+    transition: box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
   }
 
   .app-card-muted {
@@ -272,56 +286,57 @@
   }
 
   .app-button-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
-    letter-spacing: 0.029em;
-    min-width: 10.5rem;
-    font-size: 1rem;
+    @apply inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+    letter-spacing: 0.028em;
+    min-width: 11rem;
+    font-size: 1.05rem;
   }
 
   .app-button-secondary {
-    @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-6 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
-    letter-spacing: 0.01em;
-    min-width: 10.5rem;
-    font-size: 1rem;
+    @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-7 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+    letter-spacing: 0.012em;
+    min-width: 11rem;
+    font-size: 1.05rem;
   }
 
   .app-input {
     @apply w-full rounded-md border border-input bg-background px-3 py-2 text-base text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
-    margin-bottom: 0.14em;
+    margin-bottom: 0.10em;
     background-color: hsl(var(--background));
     letter-spacing: 0.01em;
+    font-size: 1.01rem;
   }
 
   .app-label {
     @apply text-base font-medium leading-none text-foreground;
-    margin-bottom: 0.18em;
-    letter-spacing: 0.005em;
+    margin-bottom: 0.12em;
+    letter-spacing: 0.006em;
   }
 
   .app-page-shell {
-    @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 sm:px-8;
+    @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-8;
     padding-top: 0;
     padding-bottom: 0;
   }
 
   .app-dashboard-shell {
-    @apply mx-auto w-full max-w-6xl px-6 py-12 md:px-8 md:py-16;
+    @apply mx-auto w-full max-w-6xl px-4 py-10 md:px-8 md:py-14;
   }
 
   .app-dashboard-panel {
-    @apply rounded-xl border border-border bg-card shadow-sm p-6;
+    @apply rounded-xl border border-border bg-card shadow-sm p-7;
     display: flex;
     flex-direction: column;
-    gap: 2.2rem;
+    gap: 1.7rem;
     background: hsl(var(--card));
-    box-shadow: 0 1.5px 8px 0 rgba(35, 31, 78, 0.07);
+    box-shadow: 0 1.5px 8px 0 rgba(35, 31, 78, 0.08);
   }
 
   .app-dashboard-panel-muted {
-    @apply rounded-xl border border-border bg-secondary/30 p-6;
+    @apply rounded-xl border border-border bg-secondary/30 p-7;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.1rem;
   }
 
   .app-dashboard-kpi {
@@ -331,24 +346,25 @@
     align-items: flex-start;
     gap: 0.42rem;
     min-width: 7rem;
-    line-height: 1.35;
-    font-size: 1.05rem;
+    line-height: 1.37;
+    font-size: 1.06rem;
     font-weight: 600;
-    background: linear-gradient(120deg, hsl(var(--background)) 85%, hsl(var(--secondary)) 100%);
-    box-shadow: 0 0.25px 3px 0 rgba(34, 52, 64, 0.06);
+    background: linear-gradient(120deg, hsl(var(--background)) 83%, hsl(var(--secondary)) 100%);
+    box-shadow: 0 0.25px 3px 0 rgba(34, 52, 64, 0.056);
   }
 
   .app-badge {
     @apply inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground;
     letter-spacing: 0.055em;
     text-transform: uppercase;
+    font-weight: 600;
   }
 
   .app-empty-state {
     @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-base text-muted-foreground;
     letter-spacing: 0.004em;
-    line-height: 1.64;
-    font-size: 1.06rem;
+    line-height: 1.63;
+    font-size: 1.07rem;
     background: hsl(var(--background));
   }
 }
