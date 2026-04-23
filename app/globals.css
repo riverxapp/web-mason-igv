@@ -58,6 +58,9 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     font-size: 16px;
+    /* Prevent legacy or user agent overflows */
+    min-width: 320px;
+    overflow-x: hidden;
   }
 
   body {
@@ -69,6 +72,10 @@
     line-height: 1.65;
     letter-spacing: 0.01em;
     background-color: hsl(var(--background));
+    margin: 0;
+    padding: 0;
+    /* Remove legacy body spacing */
+    box-sizing: border-box;
   }
 
   a,
@@ -80,6 +87,9 @@
     font-family: inherit;
     font-size: inherit;
     color: inherit;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
   }
 
   ::selection {
@@ -98,6 +108,7 @@
     margin-bottom: 0.9em;
     margin-top: 0.3em;
     line-height: 1.13;
+    letter-spacing: -0.035em;
   }
 
   h2 {
@@ -105,6 +116,7 @@
     margin-bottom: 0.7em;
     margin-top: 2.4em;
     line-height: 1.18;
+    letter-spacing: -0.03em;
   }
 
   h3 {
@@ -112,12 +124,14 @@
     margin-bottom: 0.5em;
     margin-top: 1.5em;
     line-height: 1.21;
+    letter-spacing: -0.02em;
   }
 
   h4, h5, h6 {
     @apply font-semibold text-foreground;
     margin-top: 1.05em;
     margin-bottom: 0.35em;
+    letter-spacing: -0.01em;
   }
 
   p,
@@ -125,6 +139,7 @@
     @apply text-base md:text-lg leading-relaxed text-muted-foreground;
     margin-bottom: 1em;
     line-height: 1.72;
+    letter-spacing: 0.01em;
   }
 
   ul,
@@ -132,6 +147,7 @@
     margin-left: 1.7em;
     margin-bottom: 1.1em;
     padding-left: 1.4em;
+    line-height: 1.68;
   }
 
   li {
@@ -143,6 +159,21 @@
   section {
     margin-bottom: 2.4rem;
     @apply w-full;
+    /* Remove conflicting default horizontal padding */
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Remove margin and padding on first/last child for stack consistency */
+  main > *:first-child,
+  section > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  main > *:last-child,
+  section > *:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   /* Normalize legacy/overly generic styles that may conflict */
@@ -159,12 +190,29 @@
   .app-label {
     @apply text-base font-medium leading-none text-foreground;
     margin-bottom: 0.23em;
+    letter-spacing: 0.005em;
+  }
+
+  /* Tighten disabled state colors */
+  :disabled, [aria-disabled="true"] {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    background: none !important;
+    color: hsl(var(--muted-foreground)) !important;
   }
 
   /* Override for horizontal rule for clean separation */
   hr {
     @apply border-border;
     margin: 2.5rem 0;
+  }
+
+  /* Remove unwanted fieldset/legend default spacing */
+  fieldset,
+  legend {
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 }
 
@@ -179,6 +227,8 @@
 
   .app-section {
     @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .app-section-padding {
@@ -190,12 +240,14 @@
     line-height: 1.14;
     margin-bottom: 1.18rem;
     margin-top: 0.2rem;
+    letter-spacing: -0.025em;
   }
 
   .app-subheading {
     @apply text-sm leading-6 text-muted-foreground sm:text-base;
     margin-bottom: 0.72em;
     line-height: 1.68;
+    letter-spacing: 0.01em;
   }
 
   .app-card {
@@ -228,15 +280,20 @@
     @apply w-full rounded-md border border-input bg-background px-3 py-2 text-base text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
     margin-bottom: 0.16em;
     background-color: hsl(var(--background));
+    letter-spacing: 0.01em;
   }
 
   .app-label {
     @apply text-base font-medium leading-none text-foreground;
     margin-bottom: 0.2em;
+    letter-spacing: 0.005em;
   }
 
   .app-page-shell {
     @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 sm:px-8;
+    /* Remove auto vertical pad for stack consistency */
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .app-dashboard-shell {
@@ -264,14 +321,23 @@
     align-items: flex-start;
     gap: 0.35rem;
     min-width: 7rem;
+    /* Tighten up spacing for KPI display */
+    line-height: 1.38;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   .app-badge {
     @apply inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .app-empty-state {
     @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-base text-muted-foreground;
     letter-spacing: 0.005em;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    background: hsl(var(--background));
   }
 }
