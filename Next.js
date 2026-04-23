@@ -1,17 +1,139 @@
-Unified scope document:
-- intent_summary: Improve the main landing page and dashboard design for a Next.js project management app while preserving existing behavior.
-- requested_outcome: A cleaner homepage and a more polished dashboard UI with consistent spacing, hierarchy, and visual treatment.
-- in_scope: Update the landing page presentation, refine the dashboard layout and card styles, and adjust shared globals if needed for consistent visual polish.
-- out_of_scope: Backend/API logic changes, route restructuring, unrelated refactors, and content rewrites beyond layout/design improvements.
-- constraints: Preserve unrelated logic, keep changes file-scoped and deterministic, respect App Router boundaries, and avoid broad style churn.
-- assumptions: The repository is App Router-based and the listed paths are the primary surfaces needed for the tool.
-- affected_surfaces: app/page.tsx, app/dashboard/projects/page.tsx, app/globals.css.
-- target_file_candidates:
-  1. app/page.tsx — main landing page cleanup and visual hierarchy improvements.
-  2. app/dashboard/projects/page.tsx — dashboard design polish and layout refinement.
-  3. app/globals.css — shared styling adjustments to support the updated surfaces.
-  4. app/layout.tsx — only if shell-level spacing/navigation needs alignment with the refreshed UI.
-- risk_notes: Styling changes may need coordinated updates across shared layout and page-specific classes; ensure existing interactions and API behavior remain intact.
-- success_checks: Homepage reads cleaner, dashboard feels more polished and usable, shared styling remains consistent, and navigation still reaches the projects workspace.
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-Task 5: validate cross-file integration across app/page.tsx, app/dashboard/projects/page.tsx, app/api/projects/route.ts, and app/layout.tsx by checking navigation links, route consistency, and basic end-to-end behavior assumptions for Next.js app router.
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    @apply outline-none;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.14);
+    color: hsl(var(--foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .app-surface {
+    @apply rounded-2xl border border-border bg-card shadow-sm;
+  }
+
+  .app-surface-muted {
+    @apply rounded-2xl border border-border bg-secondary/40;
+  }
+
+  .app-section {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  .app-section-padding {
+    @apply py-12 sm:py-14 lg:py-16;
+  }
+
+  .app-heading {
+    @apply text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl;
+  }
+
+  .app-subheading {
+    @apply text-sm leading-6 text-muted-foreground sm:text-base;
+  }
+
+  .app-card {
+    @apply rounded-2xl border border-border bg-card text-card-foreground shadow-sm;
+  }
+
+  .app-card-muted {
+    @apply rounded-2xl border border-border bg-secondary/40;
+  }
+
+  .app-button-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .app-button-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .app-input {
+    @apply w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .app-label {
+    @apply text-sm font-medium leading-none text-foreground;
+  }
+
+  .app-page-shell {
+    @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 sm:px-8;
+  }
+}
