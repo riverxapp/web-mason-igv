@@ -634,10 +634,7 @@ export default function ProjectsPage() {
                     {selectedProject.progress}%
                   </span>
                 </div>
-                <div
-                  aria-hidden="true"
-                  className="h-2 rounded-full bg-secondary"
-                >
+                <div aria-hidden="true" className="h-2 rounded-full bg-secondary">
                   <div
                     className="h-2 rounded-full bg-primary transition-all"
                     style={{ width: `${selectedProject.progress}%` }}
