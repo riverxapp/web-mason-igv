@@ -61,21 +61,23 @@ export default function HomePage() {
   return (
     <main className="bg-background text-foreground">
       <section className="border-b border-border">
-        <div className="mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-6xl items-center gap-12 px-6 py-16 md:px-8 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-6xl items-center gap-12 px-6 py-16 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-8">
-            <div className="space-y-4">
+            <div className="space-y-5">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                Agency OS
+                Startup OS
               </p>
-              <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
-                Build a startup operating system for projects, tasks, and team
-                delivery.
-              </h1>
-              <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-                Centralize projects, task ownership, status updates, deadlines,
-                and notes in one focused workspace built to help your startup
-                plan clearly and execute faster.
-              </p>
+              <div className="space-y-4">
+                <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+                  Run projects, track delivery, and keep the team aligned in one
+                  workspace.
+                </h1>
+                <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+                  A cleaner entry point for founders and operators to review
+                  priorities, open the dashboard, and manage day-to-day work
+                  without losing context.
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -83,13 +85,13 @@ export default function HomePage() {
                 href="/dashboard/projects"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                Open projects workspace
+                Open project dashboard
               </Link>
               <a
                 href="#overview"
                 className="inline-flex h-12 items-center justify-center rounded-md border border-border px-6 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
               >
-                Explore workflow overview
+                Explore workspace overview
               </a>
             </div>
 
@@ -112,14 +114,18 @@ export default function HomePage() {
             id="overview"
             className="rounded-2xl border border-border bg-card p-6 shadow-sm"
           >
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  Core workflow
+                  Dashboard overview
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold">
-                  Everything your startup team needs to stay aligned
+                  A focused operational view for startup execution
                 </h2>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Start with projects, then expand into the supporting workflow
+                  surfaces as your product grows.
+                </p>
               </div>
 
               <div className="space-y-3">
@@ -138,7 +144,7 @@ export default function HomePage() {
 
               <div className="rounded-xl bg-secondary p-4">
                 <p className="text-sm font-medium text-secondary-foreground">
-                  Start in the projects workspace to create initiatives, assign
+                  Open the projects workspace to create initiatives, assign
                   owners, set deadlines, and track execution in one place.
                 </p>
                 <div className="mt-4">
@@ -190,7 +196,7 @@ export default function HomePage() {
               href="/dashboard/projects"
               className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Launch the project dashboard
+              Launch dashboard
             </Link>
             <a
               href="#startup-readiness"
