@@ -6,9 +6,14 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Agency Project Manager",
+  title: {
+    default: "Agency Project Manager",
+    template: "%s | Agency Project Manager",
+  },
   description:
-    "An agency project management app for tracking clients, projects, tasks, and delivery progress.",
+    "A project management workspace for tracking clients, projects, tasks, and delivery progress.",
+  applicationName: "Agency Project Manager",
+  metadataBase: new URL("https://example.com"),
 };
 
 export default function RootLayout({
