@@ -67,7 +67,6 @@ function runDrizzleMigrate() {
     return;
   }
 
-  // Fallback when local binary is missing; do not pin an old CLI version.
   run(
     "npx",
     ["--yes", "drizzle-kit", "migrate", "--config", "drizzle.config.ts"],
@@ -115,17 +114,27 @@ function getDbTarget(urlString) {
   }
 }
 
-// Drizzle applies only migrations listed in drizzle/meta/_journal.json.
-// Guard rail: fail early if a .sql migration exists that isn't in the journal,
-// which would otherwise be silently skipped by the CLI.
-try {
+function shouldSkipMigrationValidation() {
+  return !fs.existsSync(MIGRATIONS_DIR) || !fs.existsSync(JOURNAL_PATH);
+}
+
+function validateDrizzleJournal() {
+  if (shouldSkipMigrationValidation()) {
+    console.warn(
+      "ℹ️ Skipping Drizzle journal validation because drizzle migrations are not present in this repository yet."
+    );
+    return;
+  }
+
   const sqlFiles = fs
     .readdirSync(MIGRATIONS_DIR)
-    .filter((f) => f.endsWith(".sql"))
-    .map((f) => path.parse(f).name);
+    .filter((file) => file.endsWith(".sql"))
+    .map((file) => path.parse(file).name);
 
   const journal = JSON.parse(fs.readFileSync(JOURNAL_PATH, "utf8"));
-  const journalTags = (journal.entries || []).map((e) => e.tag);
+  const journalTags = Array.isArray(journal.entries)
+    ? journal.entries.map((entry) => entry.tag)
+    : [];
 
   const missing = sqlFiles.filter((tag) => !journalTags.includes(tag));
   if (missing.length) {
@@ -138,6 +147,10 @@ try {
     );
     process.exit(1);
   }
+}
+
+try {
+  validateDrizzleJournal();
 } catch (err) {
   console.error("❌ Failed to validate Drizzle journal:", err);
   process.exit(1);
