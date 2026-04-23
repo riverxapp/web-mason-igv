@@ -56,13 +56,17 @@
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    font-size: 16px;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     min-height: 100vh;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-family: 'Inter', 'Segoe UI', 'Arial', 'sans-serif';
     text-rendering: optimizeLegibility;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
   }
 
   a,
@@ -81,6 +85,52 @@
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
+  }
+
+  /* Enhanced typography and spacing */
+  h1, .app-heading {
+    @apply font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-foreground;
+    margin-bottom: 0.7em;
+  }
+
+  h2 {
+    @apply font-semibold text-2xl sm:text-3xl lg:text-4xl text-foreground leading-snug tracking-tight;
+    margin-bottom: 0.6em;
+    margin-top: 2em;
+  }
+
+  h3 {
+    @apply font-semibold text-xl sm:text-2xl text-foreground leading-snug tracking-tight;
+    margin-bottom: 0.45em;
+    margin-top: 1.25em;
+  }
+
+  h4, h5, h6 {
+    @apply font-semibold text-foreground;
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+  }
+
+  p,
+  .app-subheading {
+    @apply text-base md:text-lg leading-relaxed text-muted-foreground;
+    margin-bottom: 0.8em;
+  }
+
+  ul, ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    padding-left: 1.25em;
+  }
+
+  li {
+    margin-bottom: 0.4em;
+  }
+
+  main,
+  section {
+    margin-bottom: 2rem;
+    @apply w-full;
   }
 }
 
@@ -103,34 +153,39 @@
 
   .app-heading {
     @apply text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl;
+    line-height: 1.14;
+    margin-bottom: 1.2rem;
   }
 
   .app-subheading {
     @apply text-sm leading-6 text-muted-foreground sm:text-base;
+    margin-bottom: 0.6em;
   }
 
   .app-card {
     @apply rounded-2xl border border-border bg-card text-card-foreground shadow-sm;
+    padding: 1.75rem 1.25rem;
   }
 
   .app-card-muted {
     @apply rounded-2xl border border-border bg-secondary/40;
+    padding: 1.75rem 1.25rem;
   }
 
   .app-button-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+    @apply inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
   }
 
   .app-button-secondary {
-    @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+    @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-6 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
   }
 
   .app-input {
-    @apply w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    @apply w-full rounded-md border border-input bg-background px-3 py-2 text-base text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 
   .app-label {
-    @apply text-sm font-medium leading-none text-foreground;
+    @apply text-base font-medium leading-none text-foreground;
   }
 
   .app-page-shell {
@@ -138,26 +193,30 @@
   }
 
   .app-dashboard-shell {
-    @apply mx-auto w-full max-w-6xl px-6 py-10 md:px-8 md:py-14;
+    @apply mx-auto w-full max-w-6xl px-6 py-12 md:px-8 md:py-16;
   }
 
   .app-dashboard-panel {
-    @apply rounded-xl border border-border bg-card shadow-sm;
+    @apply rounded-xl border border-border bg-card shadow-sm p-6;
   }
 
   .app-dashboard-panel-muted {
-    @apply rounded-xl border border-border bg-secondary/30;
+    @apply rounded-xl border border-border bg-secondary/30 p-6;
   }
 
   .app-dashboard-kpi {
-    @apply rounded-xl border border-border bg-background p-4 shadow-sm;
+    @apply rounded-xl border border-border bg-background p-6 shadow-sm;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
   }
 
   .app-badge {
-    @apply inline-flex items-center rounded-full border border-border bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground;
+    @apply inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground;
   }
 
   .app-empty-state {
-    @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-sm text-muted-foreground;
+    @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-base text-muted-foreground;
   }
 }
