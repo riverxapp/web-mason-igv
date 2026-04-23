@@ -3,6 +3,16 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+// --- BEGIN: Fix missing Card imports ---
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+} from "@/components/ui/card";
+// --- END: Fix missing Card imports ---
+
 type ApiProjectStatus = "planned" | "active" | "completed";
 type ProjectStatus = "Planning" | "In progress" | "Review" | "Complete";
 type ViewState = "list" | "create" | "details" | "edit";
