@@ -23,7 +23,7 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
@@ -54,6 +54,8 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -84,26 +86,54 @@
 
 @layer components {
   .app-surface {
-    @apply rounded-xl border border-border bg-card shadow-sm;
+    @apply rounded-2xl border border-border bg-card shadow-sm;
   }
 
   .app-surface-muted {
-    @apply rounded-xl border border-border bg-secondary/40;
+    @apply rounded-2xl border border-border bg-secondary/40;
   }
 
   .app-section {
-    @apply mx-auto w-full max-w-6xl px-6 md:px-8;
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
   }
 
   .app-section-padding {
-    @apply py-12 md:py-16;
+    @apply py-12 sm:py-14 lg:py-16;
   }
 
   .app-heading {
-    @apply text-3xl font-semibold tracking-tight md:text-4xl;
+    @apply text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl;
   }
 
   .app-subheading {
-    @apply text-sm leading-6 text-muted-foreground md:text-base;
+    @apply text-sm leading-6 text-muted-foreground sm:text-base;
+  }
+
+  .app-card {
+    @apply rounded-2xl border border-border bg-card text-card-foreground shadow-sm;
+  }
+
+  .app-card-muted {
+    @apply rounded-2xl border border-border bg-secondary/40;
+  }
+
+  .app-button-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .app-button-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .app-input {
+    @apply w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .app-label {
+    @apply text-sm font-medium leading-none text-foreground;
+  }
+
+  .app-page-shell {
+    @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 sm:px-8;
   }
 }
