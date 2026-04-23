@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import "./globals.css";
 
@@ -15,6 +16,12 @@ export const metadata: Metadata = {
   applicationName: "Agency Project Manager",
   metadataBase: new URL("https://example.com"),
 };
+
+const navigation = [
+  { href: "/", label: "Dashboard" },
+  { href: "/dashboard/projects", label: "Projects" },
+  { href: "/dashboard/clients", label: "Clients" },
+];
 
 export default function RootLayout({
   children,
@@ -41,16 +48,19 @@ export default function RootLayout({
                     Project management workspace
                   </p>
                 </div>
-                <nav className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
-                  <a href="/" className="transition-colors hover:text-foreground">
-                    Dashboard
-                  </a>
-                  <a href="#projects" className="transition-colors hover:text-foreground">
-                    Projects
-                  </a>
-                  <a href="#clients" className="transition-colors hover:text-foreground">
-                    Clients
-                  </a>
+                <nav
+                  aria-label="Primary"
+                  className="flex items-center gap-6 text-sm font-medium text-muted-foreground"
+                >
+                  {navigation.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="transition-colors hover:text-foreground"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </nav>
               </div>
             </header>
