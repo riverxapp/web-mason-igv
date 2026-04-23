@@ -136,4 +136,28 @@
   .app-page-shell {
     @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 sm:px-8;
   }
+
+  .app-dashboard-shell {
+    @apply mx-auto w-full max-w-6xl px-6 py-10 md:px-8 md:py-14;
+  }
+
+  .app-dashboard-panel {
+    @apply rounded-xl border border-border bg-card shadow-sm;
+  }
+
+  .app-dashboard-panel-muted {
+    @apply rounded-xl border border-border bg-secondary/30;
+  }
+
+  .app-dashboard-kpi {
+    @apply rounded-xl border border-border bg-background p-4 shadow-sm;
+  }
+
+  .app-badge {
+    @apply inline-flex items-center rounded-full border border-border bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground;
+  }
+
+  .app-empty-state {
+    @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-sm text-muted-foreground;
+  }
 }
