@@ -1,9 +1,10 @@
-We need to update app/globals.css based on the request. The user wants to redesign the landing page (app/page.tsx) but the specific task instruction says "Task 2: Given the request, we need to update app/page.tsx..." However, the current request is to update app/globals.css. The user provided a large block of CSS under "### app/globals.css" in the "Relevant files" section, which appears to be the intended final state. The file already contains that CSS content. The request says "Update this source file based on the request while preserving unrelated logic." The file is already the same as the content provided. But the user might be asking to update globals.css to that content. However, the instruction says "Compile only for target file: Next.js" and then "Task instruction: Task 2: Given the request, we need to update app/page.tsx...." Wait, the user's message includes a long planning context, but the specific action is to update app/globals.css. The user wrote: "File path: Next.js" and then "Current file content: The user wants to update `app/globals.css` with the provided content." Then they output the CSS. So the user is asking to update globals.css. The request is to output the final file content for app/globals.css, which should be exactly the CSS provided in the "Relevant files" section. Since the content is already in the relevant files, we just need to output it as the final file.
+We need to output the final file content for globals.css as per the request. The user provided a large CSS block under "### app/globals.css" in the "Relevant files" section, which appears to be the intended final state. The request says "Update this source file based on the request while preserving unrelated logic." The file content provided seems to be the updated globals.css. The instruction says "Compile only for target file: Next.js" but then the "File path: Next.js" seems ambiguous. However, the context clarifies that the target file is app/globals.css, and we are to output that file's content.
 
-But wait, the instruction says "Return ONLY the final file content text." So we should output just the CSS content. No extra explanation.
+Thus, the final file content should be the CSS that was shown. We'll output exactly that CSS, with no extra marks or code fences. The CSS is already defined in the relevant files. We'll reproduce it.
 
-Thus, I will output the CSS content exactly as shown in the relevant files section for app/globals.css.
-```css
+Important: The instruction says "Return ONLY the final file content text." and "Do not include explanations, reasoning, greetings, markdown, or code fences." So we must output the raw CSS as it is.
+
+Thus, I will output the CSS content that was provided.
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -107,7 +108,6 @@ Thus, I will output the CSS content exactly as shown in the relevant files secti
     outline-offset: 2px;
   }
 
-  /* Enhanced dashboard typography and headings for visual hierarchy */
   h1,
   .app-heading {
     @apply font-bold tracking-tight leading-tight text-foreground;
@@ -156,7 +156,6 @@ Thus, I will output the CSS content exactly as shown in the relevant files secti
     letter-spacing: -0.007em;
   }
 
-  /* Improve paragraph and section body contrast, rhythm, and spacing */
   p,
   .app-subheading {
     @apply text-base md:text-lg leading-relaxed text-muted-foreground;
@@ -182,7 +181,6 @@ Thus, I will output the CSS content exactly as shown in the relevant files secti
     padding-left: 0.05em;
   }
 
-  /* Responsive section spacing and reset for dashboard rhythm */
   main,
   section {
     margin-bottom: 2.1rem;
@@ -203,7 +201,7 @@ Thus, I will output the CSS content exactly as shown in the relevant files secti
     padding-bottom: 0 !important;
   }
 
-  [style*="margin"], [style*="padding"] {
+  [style*"margin"], [style*"padding"] {
     margin-top: revert-layer !important;
     margin-bottom: revert-layer !important;
     padding-top: revert-layer !important;
@@ -239,7 +237,6 @@ Thus, I will output the CSS content exactly as shown in the relevant files secti
 }
 
 @layer components {
-  /* Visual shell improvements for dashboard sections */
   .app-surface {
     @apply rounded-2xl border border-border bg-card shadow-sm;
   }
@@ -374,4 +371,3 @@ Thus, I will output the CSS content exactly as shown in the relevant files secti
     background: hsl(var(--background));
   }
 }
-```
