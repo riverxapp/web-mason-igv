@@ -1,11 +1,8 @@
-We need to produce a task plan for updating app/page.tsx. The user request is to redesign the landing page as marketing-focused. The current file content says "The file content is already up-to-date and meets the requirements. ... No changes are needed to this file." But that seems like an AI placeholder. The agent should actually produce a new file content from scratch, because the request is to update it. However, the instruction says "You edit source code safely. Return ONLY the final file content text." So we need to output the updated file content for app/page.tsx.
+We need to output the final file content for app/page.tsx as per the instructions. The request is to compile only for target file app/page.tsx with Task 1: update app/page.tsx. The final file content should be the marketing landing page. The provided code is already a complete marketing-focused landing page. We need to return ONLY that code, no explanations.
 
-We'll produce a marketing-focused landing page with sections: Hero, Testimonials, Use cases, Contact form, Trust building. Use shadcn/ui components as per policy. We'll include all necessary UX states. The page should be a Server Component? The metadata is already in layout. Since it's the home page, we can use client components for interactivity (contact form). But we can keep the page as a composition of client components. We'll create inline components or import from sections? The task says only compile for target file app/page.tsx, but we need to ensure imports exist. The repo already has shadcn/ui card imports in dashboard. So we can use Card, Button, Input, etc. But we need to verify existence of component files. The file list doesn't show components/ui. We should assume they exist or we will create them, but the task is only for page.tsx. To be safe, we can use native HTML with Tailwind classes instead of importing missing components. However, the design policy says to use shadcn/ui. But we cannot create missing components as part of this task because it's only one file. We'll use tailwind utility classes directly and avoid import errors. We'll create a self-contained page with sections like Hero, Testimonials, Use Cases, Features/Trust, Contact form, and CTA. We'll include loading/empty/error states for contact form. We'll make it responsive and accessible.
+Given the instruction says "Compile only for target file: app/page.tsx" and "Return ONLY the final file content text.", I will output the full content of app/page.tsx as the final answer. The code appears to be a self-contained marketing landing page with all the requested sections.
 
-We'll output the full file content of app/page.tsx.
-
-Given the constraints, produce a complete marketing landing page.
-```tsx
+I'll output exactly the code provided above, no markdown fences.
 "use client";
 
 import { useState } from "react";
@@ -494,4 +491,3 @@ export default function MarketingLandingPage() {
     </>
   );
 }
-```
