@@ -1,106 +1,443 @@
-We need to update globals.css based on the request. The request is about redesigning the landing page, but the task specifically for globals.css might involve adding styles for marketing-focused sections. However, the context says "Compile only for target file: globals.css" and "Task instruction: Task 4: update globals.css using unified diff." So we need to generate a unified diff for globals.css that includes necessary styles for the new marketing landing page. The current globals.css already has extensive styling, but we may need to add specific classes for new sections like testimonials, use cases, contact form, trust building, etc. Since we are only updating globals.css, we should add utility classes or component styles for those sections.
+We need to output the final globals.css file content after applying the requested updates. The conversation provided a draft unified diff context, but we need to compile; we must output the full globals.css file with the new marketing landing styles appended. The instruction says "Return ONLY the final file content text." for globals.css. So we should include the entire globals.css (as currently known) plus the added styles from the diff. Since we don't have the exact original globals.css file structure, we need to reconstruct the expected final file. The provided diff shows additions after the `.app-empty-state` block inside `@layer components`. The original file's content is given in the conversation history. I'll use that as the base and append the new marketing classes at the end of `@layer components`, before the closing `}`.
 
-Given the scope document from earlier, we should add styles that support:
-- Testimonials section (cards, quotes, avatars)
-- Use cases section (grid of cards)
-- Contact form section (form inputs, labels, buttons)
-- Trust badges (logos, metrics, social proof)
+The base file includes all the `@layer base` styles and `@layer components` up to `.app-empty-state`. I will combine them, ensuring proper syntax. No changes to other parts. The diff indicates adding new CSS after `.app-empty-state`. I'll do that in the final output.
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-But we need to be careful not to duplicate existing styles. The existing CSS has many component classes (app-surface, app-card, app-button-primary, etc.). We can add new classes for specific sections.
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.75rem;
+  }
 
-We'll produce a unified diff that adds CSS rules for:
-- `.testimonials-section`, `.testimonial-card`, `.testimonial-avatar`, `.testimonial-quote`
-- `.use-cases-section`, `.use-case-card`
-- `.contact-section`, `.contact-form`, `.contact-input` (though app-input exists)
-- `.trust-badges-section`, `.trust-logo`, `.trust-metric`
-- Additional responsive and spacing styles.
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
 
-Also consider adding smooth scroll for anchor links if not present.
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
 
-But the instruction says "Compile only for target file: globals.css" and "Task instruction: Task 4: update globals.css using unified diff." So we output only the unified diff for globals.css.
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-size: 16px;
+    min-width: 320px;
+    overflow-x: hidden;
+    background-color: hsl(var(--background));
+  }
 
-We'll write a diff that adds these classes after the existing component layer.
+  body {
+    @apply bg-background text-foreground antialiased;
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-family: 'Inter', 'Segoe UI', 'Arial', 'sans-serif';
+    text-rendering: optimizeLegibility;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    background-color: hsl(var(--background));
+    margin: 0;
+    padding: 0;
+  }
 
-Let's craft the diff.
-```diff
---- a/app/globals.css
-+++ b/app/globals.css
-@@ -202,6 +202,75 @@
-   .app-empty-state {
-     @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-base text-muted-foreground;
-     letter-spacing: 0.004em;
-     line-height: 1.63;
-     font-size: 1.07rem;
-     background: hsl(var(--background));
-   }
-+
-+  /* Marketing landing page components */
-+  .testimonial-card {
-+    @apply flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm;
-+    transition: box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
-+  }
-+
-+  .testimonial-card:hover {
-+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-+  }
-+
-+  .testimonial-avatar {
-+    @apply h-12 w-12 rounded-full bg-muted;
-+    object-fit: cover;
-+  }
-+
-+  .testimonial-quote {
-+    @apply text-sm leading-relaxed text-muted-foreground italic;
-+    font-size: 1.05rem;
-+  }
-+
-+  .testimonial-author {
-+    @apply text-sm font-medium text-foreground;
-+  }
-+
-+  .use-case-card {
-+    @apply flex flex-col gap-4 rounded-2xl border border-border bg-background p-6 shadow-sm transition-all;
-+  }
-+
-+  .use-case-card:hover {
-+    @apply border-primary/30 shadow-md;
-+    transform: translateY(-2px);
-+  }
-+
-+  .use-case-icon {
-+    @apply h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center;
-+  }
-+
-+  .contact-form {
-+    @apply mx-auto w-full max-w-lg space-y-6;
-+  }
-+
-+  .contact-form .app-input {
-+    @apply w-full rounded-lg border border-input bg-background px-4 py-3 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-+  }
-+
-+  .contact-form textarea.app-input {
-+    min-height: 8rem;
-+    resize: vertical;
-+  }
-+
-+  .trust-badge-grid {
-+    @apply grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-center justify-items-center;
-+  }
-+
-+  .trust-badge-item {
-+    @apply flex items-center justify-center px-4 py-3 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0;
-+  }
-+
-+  .trust-metric {
-+    @apply flex flex-col items-center gap-1 text-center;
-+  }
-+
-+  .trust-metric-value {
-+    @apply text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl;
-+  }
-+
-+  .trust-metric-label {
-+    @apply text-sm text-muted-foreground;
-+  }
-```
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    @apply outline-none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    transition: color 0.12s, background 0.14s;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.15);
+    color: hsl(var(--foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Enhanced dashboard typography and headings for visual hierarchy */
+  h1,
+  .app-heading {
+    @apply font-bold tracking-tight leading-tight text-foreground;
+    font-size: 2.75rem;
+    line-height: 1.07;
+    margin-bottom: 0.95em;
+    margin-top: 0.12em;
+    letter-spacing: -0.038em;
+  }
+  @media (min-width: 640px) {
+    h1,
+    .app-heading {
+      font-size: 3.3rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    h1,
+    .app-heading {
+      font-size: 4.3rem;
+    }
+  }
+
+  h2 {
+    @apply font-semibold text-2xl sm:text-3xl lg:text-4xl text-foreground leading-snug tracking-tight;
+    font-size: 2rem;
+    margin-bottom: 0.65em;
+    margin-top: 2.1em;
+    line-height: 1.16;
+    letter-spacing: -0.019em;
+  }
+
+  h3 {
+    @apply font-semibold text-xl sm:text-2xl text-foreground leading-snug tracking-tight;
+    font-size: 1.36rem;
+    margin-bottom: 0.47em;
+    margin-top: 1.11em;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+  }
+
+  h4, h5, h6 {
+    @apply font-semibold text-foreground;
+    font-size: 1.03rem;
+    margin-top: 0.64em;
+    margin-bottom: 0.21em;
+    letter-spacing: -0.007em;
+  }
+
+  /* Improve paragraph and section body contrast, rhythm, and spacing */
+  p,
+  .app-subheading {
+    @apply text-base md:text-lg leading-relaxed text-muted-foreground;
+    margin-bottom: 0.78em;
+    margin-top: 0.04em;
+    line-height: 1.71;
+    letter-spacing: 0.008em;
+    font-size: 1.1rem;
+    font-weight: 400;
+    max-width: 44rem;
+  }
+
+  ul,
+  ol {
+    margin-left: 2em;
+    margin-bottom: 1.16em;
+    padding-left: 1.18em;
+    line-height: 1.71;
+  }
+
+  li {
+    margin-bottom: 0.31em;
+    padding-left: 0.05em;
+  }
+
+  /* Responsive section spacing and reset for dashboard rhythm */
+  main,
+  section {
+    margin-bottom: 2.1rem;
+    @apply w-full;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: unset;
+  }
+
+  main > *:first-child,
+  section > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  main > *:last-child,
+  section > *:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  [style*="margin"], [style*="padding"] {
+    margin-top: revert-layer !important;
+    margin-bottom: revert-layer !important;
+    padding-top: revert-layer !important;
+    padding-bottom: revert-layer !important;
+  }
+
+  label,
+  .app-label {
+    @apply text-base font-medium leading-none text-foreground;
+    margin-bottom: 0.18em;
+    letter-spacing: 0.005em;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    opacity: 0.52 !important;
+    cursor: not-allowed !important;
+    background: none !important;
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  hr {
+    @apply border-border;
+    margin: 2rem 0;
+  }
+
+  fieldset,
+  legend {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+}
+
+@layer components {
+  /* Visual shell improvements for dashboard sections */
+  .app-surface {
+    @apply rounded-2xl border border-border bg-card shadow-sm;
+  }
+
+  .app-surface-muted {
+    @apply rounded-2xl border border-border bg-secondary/40;
+  }
+
+  .app-section {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-8;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .app-section-padding {
+    @apply py-14 sm:py-16 lg:py-20;
+  }
+
+  .app-heading {
+    @apply text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl;
+    line-height: 1.12;
+    margin-bottom: 1.12rem;
+    margin-top: 0.04rem;
+    letter-spacing: -0.026em;
+  }
+
+  .app-subheading {
+    @apply text-base leading-6 text-muted-foreground sm:text-lg;
+    margin-bottom: 0.72em;
+    margin-top: 0.13em;
+    line-height: 1.68;
+    letter-spacing: 0.007em;
+    font-size: 1.06rem;
+  }
+
+  .app-card {
+    @apply rounded-2xl border border-border bg-card text-card-foreground shadow-sm;
+    padding: 2rem 1.5rem 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    line-height: 1.7;
+    box-shadow: 0 0.5px 4px 0 rgba(12, 18, 31, 0.05);
+    transition: box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .app-card-muted {
+    @apply rounded-2xl border border-border bg-secondary/40;
+    padding: 2rem 1.5rem;
+  }
+
+  .app-button-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+    letter-spacing: 0.028em;
+    min-width: 11rem;
+    font-size: 1.05rem;
+  }
+
+  .app-button-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-border bg-background px-7 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60;
+    letter-spacing: 0.012em;
+    min-width: 11rem;
+    font-size: 1.05rem;
+  }
+
+  .app-input {
+    @apply w-full rounded-md border border-input bg-background px-3 py-2 text-base text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    margin-bottom: 0.10em;
+    background-color: hsl(var(--background));
+    letter-spacing: 0.01em;
+    font-size: 1.01rem;
+  }
+
+  .app-label {
+    @apply text-base font-medium leading-none text-foreground;
+    margin-bottom: 0.12em;
+    letter-spacing: 0.006em;
+  }
+
+  .app-page-shell {
+    @apply mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-8;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .app-dashboard-shell {
+    @apply mx-auto w-full max-w-6xl px-4 py-10 md:px-8 md:py-14;
+  }
+
+  .app-dashboard-panel {
+    @apply rounded-xl border border-border bg-card shadow-sm p-7;
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+    background: hsl(var(--card));
+    box-shadow: 0 1.5px 8px 0 rgba(35, 31, 78, 0.08);
+  }
+
+  .app-dashboard-panel-muted {
+    @apply rounded-xl border border-border bg-secondary/30 p-7;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .app-dashboard-kpi {
+    @apply rounded-xl border border-border bg-background p-6 shadow-sm;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.42rem;
+    min-width: 7rem;
+    line-height: 1.37;
+    font-size: 1.06rem;
+    font-weight: 600;
+    background: linear-gradient(120deg, hsl(var(--background)) 83%, hsl(var(--secondary)) 100%);
+    box-shadow: 0 0.25px 3px 0 rgba(34, 52, 64, 0.056);
+  }
+
+  .app-badge {
+    @apply inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .app-empty-state {
+    @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-base text-muted-foreground;
+    letter-spacing: 0.004em;
+    line-height: 1.63;
+    font-size: 1.07rem;
+    background: hsl(var(--background));
+  }
+
+  /* Marketing landing page components */
+  .testimonial-card {
+    @apply flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm;
+    transition: box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .testimonial-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .testimonial-avatar {
+    @apply h-12 w-12 rounded-full bg-muted;
+    object-fit: cover;
+  }
+
+  .testimonial-quote {
+    @apply text-sm leading-relaxed text-muted-foreground italic;
+    font-size: 1.05rem;
+  }
+
+  .testimonial-author {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  .use-case-card {
+    @apply flex flex-col gap-4 rounded-2xl border border-border bg-background p-6 shadow-sm transition-all;
+  }
+
+  .use-case-card:hover {
+    @apply border-primary/30 shadow-md;
+    transform: translateY(-2px);
+  }
+
+  .use-case-icon {
+    @apply h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center;
+  }
+
+  .contact-form {
+    @apply mx-auto w-full max-w-lg space-y-6;
+  }
+
+  .contact-form .app-input {
+    @apply w-full rounded-lg border border-input bg-background px-4 py-3 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  .contact-form textarea.app-input {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  .trust-badge-grid {
+    @apply grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-center justify-items-center;
+  }
+
+  .trust-badge-item {
+    @apply flex items-center justify-center px-4 py-3 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0;
+  }
+
+  .trust-metric {
+    @apply flex flex-col items-center gap-1 text-center;
+  }
+
+  .trust-metric-value {
+    @apply text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl;
+  }
+
+  .trust-metric-label {
+    @apply text-sm text-muted-foreground;
+  }
+}
