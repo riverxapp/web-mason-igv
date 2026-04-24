@@ -1,0 +1,106 @@
+We need to update globals.css based on the request. The request is about redesigning the landing page, but the task specifically for globals.css might involve adding styles for marketing-focused sections. However, the context says "Compile only for target file: globals.css" and "Task instruction: Task 4: update globals.css using unified diff." So we need to generate a unified diff for globals.css that includes necessary styles for the new marketing landing page. The current globals.css already has extensive styling, but we may need to add specific classes for new sections like testimonials, use cases, contact form, trust building, etc. Since we are only updating globals.css, we should add utility classes or component styles for those sections.
+
+Given the scope document from earlier, we should add styles that support:
+- Testimonials section (cards, quotes, avatars)
+- Use cases section (grid of cards)
+- Contact form section (form inputs, labels, buttons)
+- Trust badges (logos, metrics, social proof)
+
+But we need to be careful not to duplicate existing styles. The existing CSS has many component classes (app-surface, app-card, app-button-primary, etc.). We can add new classes for specific sections.
+
+We'll produce a unified diff that adds CSS rules for:
+- `.testimonials-section`, `.testimonial-card`, `.testimonial-avatar`, `.testimonial-quote`
+- `.use-cases-section`, `.use-case-card`
+- `.contact-section`, `.contact-form`, `.contact-input` (though app-input exists)
+- `.trust-badges-section`, `.trust-logo`, `.trust-metric`
+- Additional responsive and spacing styles.
+
+Also consider adding smooth scroll for anchor links if not present.
+
+But the instruction says "Compile only for target file: globals.css" and "Task instruction: Task 4: update globals.css using unified diff." So we output only the unified diff for globals.css.
+
+We'll write a diff that adds these classes after the existing component layer.
+
+Let's craft the diff.
+```diff
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -202,6 +202,75 @@
+   .app-empty-state {
+     @apply rounded-xl border border-dashed border-border px-4 py-10 text-center text-base text-muted-foreground;
+     letter-spacing: 0.004em;
+     line-height: 1.63;
+     font-size: 1.07rem;
+     background: hsl(var(--background));
+   }
++
++  /* Marketing landing page components */
++  .testimonial-card {
++    @apply flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm;
++    transition: box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
++  }
++
++  .testimonial-card:hover {
++    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
++  }
++
++  .testimonial-avatar {
++    @apply h-12 w-12 rounded-full bg-muted;
++    object-fit: cover;
++  }
++
++  .testimonial-quote {
++    @apply text-sm leading-relaxed text-muted-foreground italic;
++    font-size: 1.05rem;
++  }
++
++  .testimonial-author {
++    @apply text-sm font-medium text-foreground;
++  }
++
++  .use-case-card {
++    @apply flex flex-col gap-4 rounded-2xl border border-border bg-background p-6 shadow-sm transition-all;
++  }
++
++  .use-case-card:hover {
++    @apply border-primary/30 shadow-md;
++    transform: translateY(-2px);
++  }
++
++  .use-case-icon {
++    @apply h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center;
++  }
++
++  .contact-form {
++    @apply mx-auto w-full max-w-lg space-y-6;
++  }
++
++  .contact-form .app-input {
++    @apply w-full rounded-lg border border-input bg-background px-4 py-3 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
++  }
++
++  .contact-form textarea.app-input {
++    min-height: 8rem;
++    resize: vertical;
++  }
++
++  .trust-badge-grid {
++    @apply grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-center justify-items-center;
++  }
++
++  .trust-badge-item {
++    @apply flex items-center justify-center px-4 py-3 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0;
++  }
++
++  .trust-metric {
++    @apply flex flex-col items-center gap-1 text-center;
++  }
++
++  .trust-metric-value {
++    @apply text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl;
++  }
++
++  .trust-metric-label {
++    @apply text-sm text-muted-foreground;
++  }
+```
